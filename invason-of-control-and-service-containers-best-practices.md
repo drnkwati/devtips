@@ -88,6 +88,6 @@ public function getLogger() {
         return $this->ioc->get(\Psr\Log\LoggerInterface::class);
 }
 
-This way we not only free up the constructor, but also resolve dependencies as needed durin runtime. This will free up memmory and improve application performance.
+This way we not only free up the constructor but also resolve dependencies as needed during runtime. This will free up memory and improve application performance.
 
 
