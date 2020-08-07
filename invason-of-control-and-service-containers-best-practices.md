@@ -1,7 +1,7 @@
 # Invasion of control and service containers best practices.
 ## Introduction: 
 Developing enterprise applications that are scalable, reusable and extendable requires a great deal of engineering knowledge, years of experience, and adoption of well-tested design patterns.
-For this reason, modern frameworks such as symphony, laravel, angular, reactjs, and spring have come to rely on tools and techniques such as service containers, event emitters, and repository patterns to solve commonly encountered problems.
+For this reason, modern frameworks such as symphony, laravel, angular, reactjs, and spring have come to rely on techniques and tools such as service containers, event emitters, and repository patterns to solve commonly encountered problems.
 
 These tools if used appropriately can speed up development while increasing developer productivity and making the coding process enjoyable.
 
