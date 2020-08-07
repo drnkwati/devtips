@@ -26,10 +26,10 @@
 ### Пример 1: Регистрация услуг.
 В Magneto 2 службы регистрируются в файле di.xml модуля приложения.
 
-<?xml version="1.0" encoding="UTF-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Shop\Api\ShoppingCartInterface" type="Shop\Model\Carts\ShoppingCart" />
-</config>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+        <preference for="Shop\Api\ShoppingCartInterface" type="Shop\Model\Carts\ShoppingCart" />
+    </config>
 
 В этом примере интерфейс корзины покупок Magento под названием ShoppingCartInterface привязан к его реализации под названием ShoppingCart.
 
@@ -41,9 +41,9 @@
 
 ### Пример: использование Magento 2 ObjectManager (сервисный контейнер)
 
-$ioc = \Magento\Framework\App\ObjectManager::getInstance();
+    $ioc = \Magento\Framework\App\ObjectManager::getInstance();
 
-$logger = $ioc->get(\Psr\Log\LoggerInterface::class);
+    $logger = $ioc->get(\Psr\Log\LoggerInterface::class);
 
 В этом примере мы получаем экземпляр контейнера службы Magento и вызываем метод get для разрешения нашего Logger. Следует отметить, что реализация Psr \ Log \ LoggerInterface будет возвращена. Если объект не зарегистрирован как синглтон, мы всегда получаем новый экземпляр каждый раз, когда вызываем метод get. Таким образом, сервис-контейнер можно использовать как фабрику для создания объектов приложения.
  
@@ -77,17 +77,17 @@ $logger = $ioc->get(\Psr\Log\LoggerInterface::class);
 ### Пример: приведенный выше пример можно улучшить следующим образом
 
 
-public function __construct(\Magento\Framework\ObjectManagerInterface $ioc) {
-        $this->ioc = $ioc;
-}
+    public function __construct(\Magento\Framework\ObjectManagerInterface $ioc) {
+            $this->ioc = $ioc;
+    }
 
-public function getFilesystem() {
-        return $this->ioc->get(\Magento\Framework\Filesystem ::class);
-}
+    public function getFilesystem() {
+            return $this->ioc->get(\Magento\Framework\Filesystem ::class);
+    }
 
-public function getLogger() {
-        return $this->ioc->get(\Psr\Log\LoggerInterface::class);
-}
+    public function getLogger() {
+            return $this->ioc->get(\Psr\Log\LoggerInterface::class);
+    }
 
 Таким образом мы не только освобождаем конструктор, но и разрешаем зависимости по мере необходимости во время выполнения. Это освободит память и повысит производительность приложения.
 
