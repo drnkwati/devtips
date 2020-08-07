@@ -25,11 +25,12 @@ When using the dependency injection pattern, invasion of control is achieved by 
 
 ### Example 1: Registering services.
 In Magneto 2, services are registered in the app module di.xml file. 
-
+`
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Shop\Api\ShoppingCartInterface" type="Shop\Model\Carts\ShoppingCart" />
 </config>
+`
 
 In this example, the Magento shopping cart interface called ShoppingCartInterface is bound to its implementation called ShoppingCart.
 
@@ -40,10 +41,11 @@ The XML "for" attribute should reference an interface, while the "type" attribut
 Dependencies can be resolved out of the service container using the get method.
 
 ### Example: Using Magento 2  ObjectManager (service container)
-
+`
 $ioc = \Magento\Framework\App\ObjectManager::getInstance();
 
 $logger = $ioc->get(\Psr\Log\LoggerInterface::class);
+`
 
 In this example, we get an instance of Magento service container and call the get method to resolve our Logger. It should be noted that the implementation of the Psr\Log\LoggerInterface will be returned. If the object is not registered as a singleton, then we always get a new instance each time we call the get method. Therefore the service container can be used as a factory for creating application objects.  
  
@@ -51,7 +53,7 @@ In this example, we get an instance of Magento service container and call the ge
 Service containers make use of type hinting to resolve dependencies. 
 
 ### Example: PHP class construct method
-
+`
     public function __construct(
         \Magento\Framework\Filesystem $fileSystem,
         \Psr\Log\LoggerInterface $logger,
@@ -65,7 +67,7 @@ Service containers make use of type hinting to resolve dependencies.
         $this->shoppingCart = $shoppingCart;
         $this->watchingCart = $watchingCart;
     }
-
+`
 Constructor injection is a common practice but should be used with caution.
 In the example about, classes bound as singletons like the LoggerInterface and ShoppingCartInterface will always be properly resolved to a single instance. 
 However, for dependencies such as  ShoppingCart and  WatchingCart, a new instance is always created. This might result in high memory consumption and degrade performance.
@@ -74,8 +76,7 @@ For example, the logger is only needed if we actually catch an exception.
 To fix these issues, it is advisable to resolve classes lazily.
 
 ### Example: The example above can be improved as follows
-
-
+`
 public function __construct(\Magento\Framework\ObjectManagerInterface $ioc) {
         $this->ioc = $ioc;
 }
@@ -87,7 +88,7 @@ public function getFilesystem() {
 public function getLogger() {
         return $this->ioc->get(\Psr\Log\LoggerInterface::class);
 }
-
+`
 This way we not only free up the constructor but also resolve dependencies as needed during runtime. This will free up memory and improve application performance.
 
 
