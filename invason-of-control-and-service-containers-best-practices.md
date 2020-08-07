@@ -21,7 +21,7 @@ Implementation Techniques include design patterns such as:
 5. Strategy design pattern
 
 ## Dependency injection pattern in Magneto 2:
-When using the dependency injection pattern, invasion of control is achieved by separating components and module functionality into interfaces. Using the service container, these interfaces are then bound to their implementations during application bootstrapping. 
+When using the dependency injection pattern, inversion of control is achieved by separating components and module functionality into interfaces. Using the service container, these interfaces are then bound to their implementations during application bootstrapping. 
 
 ### Example 1: Registering services.
 In Magneto 2, services are registered in the app module di.xml file. 
@@ -89,6 +89,6 @@ To fix these issues, it is advisable to resolve classes lazily.
             return $this->ioc->get(\Psr\Log\LoggerInterface::class);
     }
 
-This way we not only free up the constructor but also resolve dependencies as needed during runtime. This will free up memory and improve application performance.
+#### This way we not only free up the constructor but also resolve dependencies as needed during runtime. This will free up memory and improve application performance.
 
 
