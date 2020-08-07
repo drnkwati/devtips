@@ -6,9 +6,9 @@ For this reason, modern frameworks such as symphony, laravel, angular, reactjs, 
 These tools if used appropriately can speed up development while increasing developer productivity and making the coding process enjoyable.
 
 However, if used inappropriately, application performance can significantly degrade, memory consumption can increase unnecessarily and in extreme cases, the system can come to a halt.
-This can happen for both server and client-based applications such as single page applications (SPA’s) and progressive web applications (PWA’s).
+This can happen for both server and client-based applications such as single-page applications (SPA’s) and progressive web applications (PWA’s).
 
-This article is focused on best practices when using Magento 2 service container also known as the object manager. However, the knowledge can be extended to other frameworks that make use of a service container or a similar mechanism for building object dependencies.
+This article is focused on best practices when using Magento 2 service containers also known as the object manager. However, the knowledge can be extended to other frameworks that make use of a service container or a similar mechanism for building object dependencies.
 
 ## Service containers: 
 Inversion of control (IoC) in software engineering is a principle used for intercepting the general program flow. This helps to increase modularity and extensibility.
@@ -45,7 +45,7 @@ $ioc = \Magento\Framework\App\ObjectManager::getInstance();
 
 $logger = $ioc->get(\Psr\Log\LoggerInterface::class);
 
-In this example we get an instance of Magento service container and call the get method to resolve our Logger. It should be noted that an implimentation of the Psr\Log\LoggerInterface will be returned. If the object is not registered as a singleton, then we always get a new instance each time we call the get method. Therefor the service container can be used like a factory for creating application objects.  
+In this example, we get an instance of Magento service container and call the get method to resolve our Logger. It should be noted that the implementation of the Psr\Log\LoggerInterface will be returned. If the object is not registered as a singleton, then we always get a new instance each time we call the get method. Therefore the service container can be used as a factory for creating application objects.  
  
 ## Constructor injection:
 Service containers make use of type hinting to resolve dependencies. 
@@ -66,12 +66,12 @@ Service containers make use of type hinting to resolve dependencies.
         $this->watchingCart = $watchingCart;
     }
 
-Constructor injection is a common practice but should be used with coutious.
+Constructor injection is a common practice but should be used with caution.
 In the example about, classes bound as singletons like the LoggerInterface and ShoppingCartInterface will always be properly resolved to a single instance. 
-However, for dependencies such as  ShoppingCart and  WatchingCart a new instance is always created. This might result in high memmory consumption and degrade performance.
-Furthermore we are creating object instances that might not actually be used during runtime.
-Forexample, the logger is only needed if we actually catch an exception. 
-To fix this issues, it is advisable to resolve classes lazzyly.
+However, for dependencies such as  ShoppingCart and  WatchingCart, a new instance is always created. This might result in high memory consumption and degrade performance.
+Furthermore, we are creating object instances that might not actually be used during runtime.
+For example, the logger is only needed if we actually catch an exception. 
+To fix these issues, it is advisable to resolve classes lazily.
 
 ### Example: The example above can be improved as follows
 
