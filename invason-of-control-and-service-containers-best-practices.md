@@ -24,7 +24,7 @@ Implementation Techniques include design patterns such as:
 When using the dependency injection pattern, invasion of control is achieved by separating components and module functionality into interfaces. Using the service container, these interfaces are then bound to their implementations during application bootstrapping. 
 
 ### Example 1: Registering services.
-In Magneto 2, services are registered in the app module di.xml file.
+In Magneto 2, services are registered in the app module di.xml file. 
 
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
